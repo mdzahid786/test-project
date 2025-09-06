@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create User</title>
+  </head>
+  <body>
+    <h1>Create User</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <ul>
+      {% for category, message in messages %}
+      <li
+        style="color: {% if category == 'error' %}red{% else %}green{% endif %};"
+      >
+        {{ message }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+
+    <form method="POST">
+      <input
+        type="text"
+        name="username"
+        value="{{data.username}}"
+        placeholder="Enter username"
+      /><br />
+      <input
+        type="text"
+        name="email"
+        value="{{data.email}}"
+        placeholder="Enter email"
+      /><br />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
