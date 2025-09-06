@@ -25,7 +25,7 @@ def home():
     return render_template("index.html", hello="Hello World")
 
 @app.route("/api/submittodoitem", methods=["GET", "POST"])
-def users_create():
+def submittodoitem():
     if request.method == "POST":
         data = request.form   
 
