@@ -24,6 +24,29 @@ app.secret_key = "demoflaskapplication"
 def home():
     return render_template("index.html", hello="Hello World")
 
+@app.route("/api/submittodoitem", methods=["GET", "POST"])
+def submittodoitem():
+    if request.method == "POST":
+        data = request.form   
+
+        errors = []
+        if not data.get("name"):
+            errors.append("Name is required")
+        if not data.get("description"):
+            errors.append("Description is required")
+        
+        if errors:
+            # Show validation errors on same page
+            for err in errors:
+                flash(err, "error")
+            print(errors)
+            return render_template("todo.html", data=data)
+            
+        db.users.insert_one(dict(data))
+        return redirect(url_for("success", message="Data submitted successfully"))
+    return render_template("todo.html", data=[])
+
+
 @app.route("/api/users/create", methods=["GET", "POST"])
 def users_create():
     if request.method == "POST":
