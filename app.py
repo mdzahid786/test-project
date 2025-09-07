@@ -43,7 +43,7 @@ def submittodoitem():
             return render_template("todo.html", data=data)
             
         db.users.insert_one(dict(data))
-        return redirect(url_for("success", message="Data submitted successfully"))
+        return redirect(url_for("success", message="Data submitted successfully."))
     return render_template("todo.html", data=[])
 
 
